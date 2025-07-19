@@ -1,0 +1,14 @@
+{
+  "name": "bladesbotv2",
+  "version": "1.0.0",
+  "description": "blades bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "testbot"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.21.0"
+  }
+}

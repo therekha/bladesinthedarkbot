@@ -11,7 +11,7 @@ function getPics(rolls, result){
     });
 }
 
-export async function drawDice(dicePics, msg, text) {
+export async function drawDice(rolls, msg, text) {
 	var jimps = [jimp.read('dice_pics/canvas.png')]
 	dicePics.forEach((image, i) => {
 		jimps.push(jimp.read(image))

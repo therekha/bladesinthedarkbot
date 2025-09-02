@@ -11,7 +11,7 @@ const rollDice = (diceToRoll) => {
         //THIS IS THE ROLL
         rolls.push(Math.floor(Math.random() * 6 + 1));
     }
-    console.log(rolls);
+    
     if (diceToRoll === 0) {
         return rolls, Math.min(...rolls);; //Rolled 2d, take lowest
     } else {

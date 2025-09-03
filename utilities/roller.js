@@ -1,7 +1,7 @@
 const Math = require('mathjs');
 
 const rollDice = (diceToRoll) => {
-    if(diceToRoll > 20) throw "I'm limited to rolling 20 dice at a time. I hope you don't mind!";
+    if(diceToRoll > 9) throw "I'm limited to rolling 9 dice at a time. I hope you don't mind!";
     if(diceToRoll < 0) throw "You can't roll less than zero dice..."
 
     const dice = diceToRoll || 2; //Handles 0d rolls.

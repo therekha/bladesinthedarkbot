@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { rollDice } = require('../../utilities/roller')
+const { embedReply, rollResult } = require('../../utilities/embedBuilder')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -10,9 +11,14 @@ module.exports = {
 				.setName('dice')
 				.setDescription('Number of dice being rolled.')
 				.setRequired(true)),
-	async execute(interaction) {
-        let rolls, result = rollDice(interaction.options.getInteger('dice'));
-		const mssg = 'You rolled a ' + result;
-		await interaction.reply(mssg);
+	async execute(interaction) { //gotta keep this function 2 lines
+		try {
+			let data = rollDice(interaction.options.getInteger('dice')); 
+			let reply = rollResult(data.text, data.type);
+			await interaction.reply({ embeds: [reply] });
+		} catch (error) {
+			let reply = embedReply(error);
+			await interaction.reply({ embeds: [reply] });
+		}
 	},
 };

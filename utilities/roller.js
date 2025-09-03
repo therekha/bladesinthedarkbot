@@ -2,7 +2,7 @@ const Math = require('mathjs');
 
 const rollDice = (diceToRoll) => {
     if(diceToRoll > 20) throw "I'm limited to rolling 20 dice at a time. I hope you don't mind!";
-    if(diceToRoll < 1) throw "You can't roll less than one die..."
+    if(diceToRoll < 0) throw "You can't roll less than zero dice..."
 
     const dice = diceToRoll || 2; //Handles 0d rolls.
 
@@ -13,9 +13,15 @@ const rollDice = (diceToRoll) => {
     }
     
     if (diceToRoll === 0) {
-        return rolls, Math.min(...rolls);; //Rolled 2d, take lowest
+        return {
+            rolls: rolls,
+            result: Math.min(...rolls)  //Rolled 2d, take lowest
+        } 
     } else {
-        return rolls, Math.max(...rolls); //Take highest of rolls
+        return {
+            rolls: rolls,
+            result: Math.max(...rolls)  //Take highest of rolls
+        };
     }
  }
 

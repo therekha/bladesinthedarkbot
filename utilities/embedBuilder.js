@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-const embedColor = '#412132'
+const embedColor = '412132'
 const picsPath = './dice_pics/'
 const picsURL = 'https://github.com/therekha/bladesinthedarkbot/blob/trunk/dice_pics/'
 
@@ -10,7 +10,7 @@ const embedReply = (message) =>{
 	.setDescription(message);
 }
 
-const rollResult = (text, type) => {
+const embedRollResult = (text, type) => {
     const attachment = new Discord
         .AttachmentBuilder( picsPath + 'composite.png', 'dice.png');
     
@@ -23,4 +23,4 @@ const rollResult = (text, type) => {
 }
 
 
-module.exports = {embedReply, rollResult}
+module.exports = {embedReply, embedRollResult, embedColor}

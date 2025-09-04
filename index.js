@@ -3,7 +3,7 @@ const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits, MessageFlags } = require('discord.js');
 const { token } = require('./config.json');
 const { rollDice } = require('./utilities/roller')
-const { embedReply, rollResult } = require('./utilities/embedBuilder')
+const { embedReply, rollResult, embedRollResult } = require('./utilities/embedBuilder')
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent ] });
 
@@ -52,7 +52,7 @@ client.on("messageCreate", (msg) => {
 			noDice = parseInt(content[0]);
 			try {
 				let data = rollDice(noDice); 
-				let reply = rollResult(data.text, data.type);
+				let reply = embedRollResult(data.text, data.type);
 				msg.reply({ embeds: [reply] });
 			} catch (error) {
 				let reply = embedReply(error);

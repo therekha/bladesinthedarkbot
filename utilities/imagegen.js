@@ -28,24 +28,22 @@ const getPics = (rolls, result) => {
 const combineDice = async (dicePics, saveLoc) => {
 	const canvasWidth = dicePics.length < 5 ? dicePics.length * diceWidth : 5 * diceWidth;
 	const canvasHeight = Math.ceil(dicePics.length / 5 ) * diceHeight;
-	const canvas = Canvas.createCanvas(canvasWidth, canvasHeight);
+	const canvas = Canvas.createCanvas(canvasWidth/2, canvasHeight/2);
 	const context = canvas.getContext('2d');
 
-	dicePics.forEach(async (pic, index) => {
-		x = ((index)%5)*100
-		y = Math.floor((index)/5)*106
+	let index = 0;
+	for(pic of dicePics) {
+		let x = ((index)%5)*diceWidth/2
+		let y = Math.floor((index)/5)*diceHeight/2
 
 		const image = await Canvas.loadImage(pic);
-	
-		context.drawImage(image, x, y, 100, 106)
-	});
+
+		context.drawImage(image, x, y, image.width/2, image.height/2);
+		index++;
+	}
 
 	const pngData = await canvas.encode('png') // JPEG, AVIF and WebP are also supported
 
-	if(saveLoc){
-		console.log(picsPath + saveLoc);
-  		await promises.writeFile( picsPath + saveLoc, pngData)
-	}
 
 	const attachment = new AttachmentBuilder(pngData, { name: 'dice.png' });
 	return attachment;

@@ -4,7 +4,7 @@ const { Client, Collection, Events, GatewayIntentBits, MessageFlags } = require(
 const { token } = require('./config.json');
 const { rollDice } = require('./utilities/roller')
 const { embedReply, rollResult, embedRollResult } = require('./utilities/embedBuilder');
-const { parseCommand } = require('./utilities/commandParser');
+const { parseCommand } = require('./commandParser');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent ] });
 
@@ -41,12 +41,11 @@ for (const file of eventFiles) {
 
 client.login(token);
 
-client.on("messageCreate", (msg) => {
-	command = commandArray[0].toLowerCase();
+client.on("messageCreate", async (msg) => {
 	const symbol = '$'
 
 	if (msg.content[0] === symbol) {
-		let replyEmbed = parseCommand(msg.content);
-		msg.reply({ embeds: [replyEmbed] });
+		let replyEmbed = await parseCommand(msg.content);
+		msg.reply(replyEmbed);
 	}
 });

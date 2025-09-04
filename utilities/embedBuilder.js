@@ -11,15 +11,12 @@ const embedReply = (message) =>{
 }
 
 const embedRollResult = (text, type) => {
-    const attachment = new Discord
-        .AttachmentBuilder( picsPath + 'composite.png', 'dice.png');
     
     return new Discord.EmbedBuilder()
     .setColor(embedColor)
 	.setThumbnail(picsURL + type + '.png' + '?raw=true')
 	.setDescription(text)
-	//.attachFiles(attachment)
-	//.setImage('attachment://dice.png')
+	.setImage('attachment://dice.png')
 }
 
 

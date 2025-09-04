@@ -3,7 +3,8 @@ const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits, MessageFlags } = require('discord.js');
 const { token } = require('./config.json');
 const { rollDice } = require('./utilities/roller')
-const { embedReply, rollResult, embedRollResult } = require('./utilities/embedBuilder')
+const { embedReply, rollResult, embedRollResult } = require('./utilities/embedBuilder');
+const { parseCommand } = require('./utilities/commandParser');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent ] });
 
@@ -41,22 +42,11 @@ for (const file of eventFiles) {
 client.login(token);
 
 client.on("messageCreate", (msg) => {
-	commandArray = msg.content.split(' ');
 	command = commandArray[0].toLowerCase();
 	const symbol = '$'
 
 	if (msg.content[0] === symbol) {
-		let content = msg.content.slice(1).toLowerCase().replace(/\s+/g, "");
-//todo - more robust message reading, and into a function in a file
-		if (!isNaN(content[0])) {
-			noDice = parseInt(content[0]);
-			try {
-				let data = rollDice(noDice); 
-				let reply = embedRollResult(data.text, data.type);
-				msg.reply({ embeds: [reply] });
-			} catch (error) {
-				let reply = embedReply(error);
-				msg.reply({ embeds: [reply] });
-			}
-		}
-}});
+		let replyEmbed = parseCommand(msg.content);
+		msg.reply({ embeds: [replyEmbed] });
+	}
+});

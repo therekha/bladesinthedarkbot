@@ -1,5 +1,5 @@
 const {embedReply, embedRollResult, embedColor} = require('./embedBuilder');
-imgsUrl = 'https://github.com/therekha/bladesinthedarkbot/blob/trunk/dice_pics/'
+const { picsURL } = require("./consts");
 
 const embedColorInt = parseInt(embedColor, 16); // i guess discord converts ur color to an int man. its hex to int
 
@@ -20,5 +20,5 @@ test('embedRollResult creates a valid embed', () => {
 
     expect(embed.data).toHaveProperty('color', embedColorInt);
     expect(embed.data).toHaveProperty('description', text);
-    expect(embed.data).toHaveProperty('thumbnail', { url: `${imgsUrl}${type}.png?raw=true` });
+    expect(embed.data).toHaveProperty('thumbnail', { url: `${picsURL}${type}.png?raw=true` });
 });

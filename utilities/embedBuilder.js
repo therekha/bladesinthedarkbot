@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
+const { picsURL, picsPath } = require("./consts");
 
 const embedColor = '412132'
-const picsPath = './dice_pics/'
-const picsURL = 'https://github.com/therekha/bladesinthedarkbot/blob/trunk/dice_pics/'
+
 
 const embedReply = (message) =>{
 	return new Discord.EmbedBuilder()

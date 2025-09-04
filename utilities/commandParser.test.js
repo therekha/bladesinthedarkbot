@@ -32,8 +32,6 @@ test('parseCommand handles too high in basic dice rolls', () => {
     const message = '$23';
     const result = parseCommand(message);
 
-    console.log(result);
-
     expect(result.data).toHaveProperty('description', "I'm limited to rolling 9 dice at a time. I hope you don't mind!");
 });
 

@@ -1,5 +1,21 @@
 const Math = require('mathjs');
 
+
+const resistRoll = (diceToRoll) => {
+    if(diceToRoll > 4) throw "You can't resist with more than 4 dice.";
+    let results = rollDice(diceToRoll);
+    let stressLine = '';
+    if(results.type === 'critical') {
+        stressLine = '**Critical!** Recover 1 stress.';
+    }
+    else{
+        stressLine = `Take ${6 - results.result} stress!`;
+    }
+    results.text += `\n${stressLine}`;
+
+    return results;
+}
+
 const rollDice = (diceToRoll) => {
     if(diceToRoll > 9) throw "I'm limited to rolling 9 dice at a time. I hope you don't mind!";
     if(diceToRoll < 0) throw "You can't roll less than zero dice..."
@@ -71,4 +87,4 @@ const interpretResult = (rolls, result) => {
  //TODO entanglement roll 
 
 
-module.exports = { rollDice, interpretResult }
+module.exports = { resistRoll, rollDice, interpretResult }

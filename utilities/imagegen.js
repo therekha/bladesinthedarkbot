@@ -1,10 +1,12 @@
 const Canvas = require('@napi-rs/canvas');
-const {picsURL, picsPath } = require('./consts')
+const { picsPath } = require('./consts')
 const {AttachmentBuilder} = require("discord.js");
 const { promises } = require('node:fs')
 
 const diceWidth = 100
 const diceHeight = 106
+
+//TODO error handling
 
 const drawDice = async (rolls, result, saveLoc) => {
 	imageArray = getPics(rolls, result);
@@ -44,6 +46,9 @@ const combineDice = async (dicePics, saveLoc) => {
 
 	const pngData = await canvas.encode('png') // JPEG, AVIF and WebP are also supported
 
+	if(saveLoc){
+  		await promises.writeFile( picsPath + saveLoc, pngData)
+	}
 
 	const attachment = new AttachmentBuilder(pngData, { name: 'dice.png' });
 	return attachment;

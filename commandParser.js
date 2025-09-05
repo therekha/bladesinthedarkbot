@@ -1,6 +1,7 @@
 const { embedReply, embedRollResult } = require("./utilities/embedBuilder");
 const { drawDice } = require("./utilities/imagegen");
 const { rollDice, resistRoll } = require("./utilities/roller")
+const { actions, describeAction } = require("./utilities/lookups");
 
 parseCommand = async (message) => {
 	commandArray = message.split(' '); //break command into parts
@@ -19,6 +20,9 @@ parseCommand = async (message) => {
         else{
             return {embeds: [embedReply("Command not recognised.")]};
         }
+    }
+    else if(actions.includes(command) ){
+        return {embeds: [embedReply(describeAction(command))]};
     }
     else{
         return {embeds: [embedReply("Command not recognised.")]};

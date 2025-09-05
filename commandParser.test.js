@@ -1,6 +1,6 @@
 const {parseCommand} = require('./commandParser');
 const Math = require('mathjs');
-
+const { actions, actionDescriptions } = require('./utilities/lookups');
 
 jest.mock('mathjs', () => ({
   ...jest.requireActual('mathjs'),
@@ -75,4 +75,10 @@ test.each([
     const result = await parseCommand(message);
 
     expect(result.embeds[0].data).toHaveProperty('description', "Command not recognised.");
+});
+
+test.each(actions) ('parseCommand returns a description for an action', async (action) => {
+    //ik this is one of those tests thats just rewriting the code but . yknow
+    const result = await parseCommand('$' + action);
+    expect(result.embeds[0].data).toHaveProperty('description', actionDescriptions[action]);
 });

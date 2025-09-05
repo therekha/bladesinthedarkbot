@@ -21,7 +21,6 @@ const embedRollResult = (text, type) => {
 }
 
 const embedDevilsBargain = (text, image) => {
-    console.log(image)
     return new Discord.EmbedBuilder()
     .setColor(embedColor)
     .setDescription(text)

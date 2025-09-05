@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
-const { picsURL, picsPath } = require("./consts");
+const { repoURL, picsPath } = require("./consts");
+const { pullDevilsBargain } = require("./lookups");
 
 const embedColor = '412132'
 
@@ -14,10 +15,18 @@ const embedRollResult = (text, type) => {
     
     return new Discord.EmbedBuilder()
     .setColor(embedColor)
-	.setThumbnail(picsURL + type + '.png' + '?raw=true')
+	.setThumbnail(repoURL + 'dice_pics/' + type + '.png' + '?raw=true')
 	.setDescription(text)
-	.setImage('attachment://dice.png')
+	.setImage('attachment://dice.png');
+}
+
+const embedDevilsBargain = (text, image) => {
+    console.log(image)
+    return new Discord.EmbedBuilder()
+    .setColor(embedColor)
+    .setDescription(text)
+    .setImage(image);
 }
 
 
-module.exports = {embedReply, embedRollResult, embedColor}
+module.exports = {embedReply, embedRollResult, embedColor, embedDevilsBargain}

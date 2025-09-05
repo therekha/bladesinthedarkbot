@@ -1,7 +1,7 @@
-const { embedReply, embedRollResult } = require("./utilities/embedBuilder");
+const { embedReply, embedRollResult, embedDevilsBargain } = require("./utilities/embedBuilder");
 const { drawDice } = require("./utilities/imagegen");
 const { rollDice, resistRoll } = require("./utilities/roller")
-const { actions, describeAction } = require("./utilities/lookups");
+const { actions, describeAction, pullDevilsBargain } = require("./utilities/lookups");
 
 parseCommand = async (message) => {
 	commandArray = message.split(' '); //break command into parts
@@ -20,6 +20,10 @@ parseCommand = async (message) => {
         else{
             return {embeds: [embedReply("Command not recognised.")]};
         }
+    }
+    else if(command === 'db' || command === 'devilsbargain'){
+        let bargain = pullDevilsBargain();
+        return {embeds: [embedDevilsBargain(bargain.text, bargain.image)]};
     }
     else if(actions.includes(command) ){
         return {embeds: [embedReply(describeAction(command))]};

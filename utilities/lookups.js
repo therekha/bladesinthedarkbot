@@ -1,3 +1,5 @@
+const {repoURL} = require("./consts");
+
 const actions = [
     'attune',
     'command',
@@ -61,4 +63,11 @@ const describeAction = (ability) => {
     return actionDescriptions[ability] || "I don't know that action.";
 }
 
-module.exports = { actions, actionDescriptions, describeAction };
+const pullDevilsBargain =  () => {
+	result = Math.floor(Math.random() * 50 + 1);
+	imageLink = repoURL + 'devils_bargains/DevilsBargain-'
+	 + result.toString() + '.png?raw=true'
+	return {text: 'You pull a devil\'s bargain!', image: imageLink};
+}
+
+module.exports = { actions, actionDescriptions, describeAction, pullDevilsBargain };

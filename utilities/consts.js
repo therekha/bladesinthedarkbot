@@ -1,4 +1,4 @@
-const picsURL = 'https://github.com/therekha/bladesinthedarkbot/blob/trunk/dice_pics/'
+const repoURL = 'https://github.com/therekha/bladesinthedarkbot/blob/trunk/'
 const picsPath = './dice_pics/'
 
-module.exports = { picsURL, picsPath }
+module.exports = { repoURL, picsPath }

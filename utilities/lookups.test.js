@@ -1,4 +1,4 @@
-const { actions, actionDescriptions, describeAction, pullDevilsBargain } = require('./lookups');
+const { actions, actionDescriptions, describeAction, pullDevilsBargain, help } = require('./lookups');
 const { repoURL } = require("./consts");
 
 test.each(actions) ('describeAction returns a description for %s', (action) => {
@@ -16,4 +16,9 @@ test('pullDevilsBargain returns a valid bargain', () => {
     const bargain = pullDevilsBargain();
     expect(bargain.text).toBe('You pull a devil\'s bargain!');
     expect(bargain.image).toEqual(expect.stringContaining(repoURL + 'devils_bargains/'));
+});
+
+test('help returns the right text', () => {
+    const helpText = help();
+    expect(helpText).toEqual(expect.stringContaining('## Rolling Dice'));
 });

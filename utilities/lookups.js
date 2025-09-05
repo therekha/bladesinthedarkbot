@@ -70,4 +70,21 @@ const pullDevilsBargain =  () => {
 	return {text: 'You pull a devil\'s bargain!', image: imageLink};
 }
 
-module.exports = { actions, actionDescriptions, describeAction, pullDevilsBargain };
+const help = () => {
+    return `
+## Rolling Dice
+\` $2 \`  Rolls 2 d6s
+\` $r3 \` Resistance roll of 3 d6s.
+\` $entangle <heat> <wanted level> \` Roll on the expanded entanglement table. [NOT IMPLEMENTED YET]
+\` $wanted <new wanted level> \` Response from the City Watch upon a new wanted level. [NOT IMPLEMENTED YET]
+
+## Other Commands
+\` $action <action name> \` Look up the definition of an action.
+\` $devilsbargain \` Pull a random devil's bargain.
+
+[GitHub Repo](${repoURL})
+Credits: [Devil's Bargain Cards](https://docs.google.com/document/d/1VF40zxIj2l1kNJ3kR1KhjesQc7Wr3crH/edit?usp=sharing&ouid=110046508991315423814&rtpof=true&sd=true), [Expanded Entanglements](https://drive.google.com/file/d/1cL9f2LXwr_CZ5C-Ce6c82higXtILaLRm/view)
+`
+}
+
+module.exports = { actions, actionDescriptions, describeAction, pullDevilsBargain, help };

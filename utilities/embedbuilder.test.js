@@ -7,8 +7,6 @@ test('embedReply creates a valid embed', () => {
     let message = "This is a test message";
     let embed = embedReply(message);
 
-    console.log(embed)
-
     expect(embed.data).toHaveProperty('color', embedColorInt);
     expect(embed.data).toHaveProperty('description', message);
 });

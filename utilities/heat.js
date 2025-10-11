@@ -1,7 +1,16 @@
-const { rollDice } = require('./utilities/roller');
+const { rollDice } = require('./roller');
 
 // Tools for handling heat-related results. Primarily entanglement.
 const entangle = (heat, wantedLevel) => {
+	if (heat < 0 || wantedLevel < 0) {
+		throw new Error("Heat and wanted level must be 0 or greater.");
+	}
+	if(heat > 9){
+		throw new Error("You can't have that much heat! Raise your wanted level.");
+	}
+	if(wantedLevel > 4){
+		throw new Error("Your wanted level is too high. Seek help.");
+	}
     // set "level" to determine the heat table column
     let heatTier = 1;
     if(heat < 4){
@@ -15,12 +24,12 @@ const entangle = (heat, wantedLevel) => {
     let roll = rollDice(wantedLevel);
 
 
-	let options = entanglementDescriptions[heatTier][roll.result - 1];
+	let options = entanglementTable[heatTier][roll.result - 1];
 
 
     let message = 'Choose 1: \n\n'
     options.forEach((value, index) => {
-        message += `**${value}**\n${obj['entanglementDescriptions'][value]}\n\n`
+        message += `**${value}**\n${entanglementDescriptions[value]}\n\n`
     })
 
     return { message: message, roll: roll }
@@ -132,4 +141,4 @@ const entanglementDescriptions = {
 	"War": "Pick a faction whose status with you is -2. Choose: either forfeit 2 rep per Tier of the faction, or take -1 status with them (and go to war!), due to some offense or some conflicting interests. What is the nature of the conflict? What did you do to enrage them?"
 }
 
-module.exports = { entangle }
+module.exports = { entangle, entanglementTable, entanglementDescriptions }

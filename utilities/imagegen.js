@@ -44,6 +44,8 @@ const combineDice = async (dicePics, saveLoc) => {
 		index++;
 	}
 
+	(() => {})();
+
 	const pngData = await canvas.encode('png') // JPEG, AVIF and WebP are also supported
 
 	if(saveLoc){

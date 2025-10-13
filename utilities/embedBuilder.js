@@ -20,6 +20,13 @@ const embedRollResult = (text, type) => {
 	.setImage('attachment://dice.png');
 }
 
+const embedNonActionRollResult = (text) => {
+    return new Discord.EmbedBuilder()
+    .setColor(embedColor)
+	.setDescription(text)
+	.setImage('attachment://dice.png');
+}
+
 const embedDevilsBargain = (text, image) => {
     return new Discord.EmbedBuilder()
     .setColor(embedColor)
@@ -28,4 +35,4 @@ const embedDevilsBargain = (text, image) => {
 }
 
 
-module.exports = {embedReply, embedRollResult, embedColor, embedDevilsBargain}
+module.exports = {embedReply, embedRollResult, embedNonActionRollResult, embedColor, embedDevilsBargain}

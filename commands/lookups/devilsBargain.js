@@ -11,7 +11,7 @@ module.exports = {
             let bargain = pullDevilsBargain();
             await interaction.reply({embeds: [embedDevilsBargain(bargain.text, bargain.image)]});
 		} catch (error) {
-			let reply = embedReply(error);
+			let reply = embedReply(error.message);
 			await interaction.reply({ embeds: [reply] });
 		}
 	},

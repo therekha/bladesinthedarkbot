@@ -78,7 +78,7 @@ runEntangleRoll = async (heat, wanted) => {
         
         return {embeds: [embedNonActionRollResult(data.message)], files: [image]};
     } catch (error) {
-        return {embeds: [embedReply(error)]};
+        return {embeds: [embedReply(error.message)]};
     }
 }
 

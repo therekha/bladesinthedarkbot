@@ -19,7 +19,7 @@ module.exports = {
 			let reply = embedRollResult(data.text, data.type);
 			await interaction.reply({ embeds: [reply], files: [image] });
 		} catch (error) {
-			let reply = embedReply(error);
+			let reply = embedReply(error.message);
 			await interaction.reply({ embeds: [reply] });
 		}
 	},

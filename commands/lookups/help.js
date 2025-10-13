@@ -11,7 +11,7 @@ module.exports = {
             let helpText = help();
             await interaction.reply({embeds: [embedReply(helpText)]});
 		} catch (error) {
-			let reply = embedReply(error);
+			let reply = embedReply(error.message);
 			await interaction.reply({ embeds: [reply] });
 		}
 	},

@@ -30,7 +30,7 @@ module.exports = {
             let reply = embedReply(description);
 			await interaction.reply({ embeds: [reply] });
 		} catch (error) {
-			let reply = embedReply(error);
+			let reply = embedReply(error.message);
 			await interaction.reply({ embeds: [reply] });
 		}
 	},

@@ -12,11 +12,15 @@ module.exports = {
 			option
 				.setName('heat')
 				.setDescription('Heat level, from 0 to 9.')
+                .setMinValue(0)
+                .setMaxValue(9)
 				.setRequired(true))
         .addIntegerOption(option =>
 			option
 				.setName('wantedlevel')
 				.setDescription('Wanted level, from 0 to 4.')
+                .setMinValue(0)
+                .setMaxValue(4)
 				.setRequired(true)),
 	async execute(interaction) { 
 		try {
@@ -26,7 +30,7 @@ module.exports = {
 			let reply = embedNonActionRollResult(data.message);
 			await interaction.reply({ embeds: [reply], files: [image] });
 		} catch (error) {
-            //this is brokenn
+            let reply = embedReply(error.message);
 			await interaction.reply({ embeds: [reply] });
 		}
 	},

@@ -1,6 +1,6 @@
 const {parseCommand} = require('./commandParser');
 const Math = require('mathjs');
-const { actions, actionDescriptions } = require('./utilities/lookups');
+const { actions, actionDescriptions, help } = require('./utilities/lookups');
 
 jest.mock('mathjs', () => ({
   ...jest.requireActual('mathjs'),
@@ -33,6 +33,20 @@ test('parseCommand handles too high in basic dice rolls', async () => {
     const result = await parseCommand(message);
 
     expect(result.embeds[0].data).toHaveProperty('description', "I'm limited to rolling 9 dice at a time. I hope you don't mind!");
+});
+
+test('parseCommand pulls a devils bargain', async () => {
+    const message = '$db';
+    const result = await parseCommand(message);
+
+    expect(result.embeds[0].data).toHaveProperty('description', "You pull a devil's bargain!");
+});
+
+test('parseCommand gives help text', async () => {
+    const message = '$help';
+    const result = await parseCommand(message);
+
+    expect(result.embeds[0].data).toHaveProperty('description', help());
 });
 
 test.each([
@@ -81,4 +95,37 @@ test.each(actions) ('parseCommand returns a description for an action', async (a
     //ik this is one of those tests thats just rewriting the code but . yknow
     const result = await parseCommand('$' + action);
     expect(result.embeds[0].data).toHaveProperty('description', actionDescriptions[action]);
+});
+
+test('parseCommand handles an entanglement roll', async () => {
+    Math.random
+        .mockReturnValueOnce(0.5) // 4
+        .mockReturnValueOnce(0.2); // 2
+
+    const message = '$entangle 3 2';
+    const result = await parseCommand(message);
+
+    expect(result.embeds[0].data.description).toContain('Choose 1:');
+});
+
+test('parseCommand handles a malformed entanglement roll', async () => {
+    Math.random
+        .mockReturnValueOnce(0.5) // 4
+        .mockReturnValueOnce(0.2); // 2
+
+    const message = '$entangle 3 blah';
+    const result = await parseCommand(message);
+
+    expect(result.embeds[0].data.description).toContain('Format for entanglement roll is ` $entangle <heat> <wanted level>');
+});
+
+test('parseCommand handles a too-high entanglement roll', async () => {
+    Math.random
+        .mockReturnValueOnce(0.5) // 4
+        .mockReturnValueOnce(0.2); // 2
+
+    const message = '$entangle 3 12';
+    const result = await parseCommand(message);
+
+    expect(result.embeds[0].data.description).toContain('Your wanted level is too high. Seek help.');
 });

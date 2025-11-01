@@ -1,4 +1,4 @@
-const { entangle, entanglementTable } = require('./heat.js')
+const { entangle } = require('./heat.js')
 const Math = require('mathjs');
 
 
@@ -45,4 +45,14 @@ test('return expected result', async () => {
   }
 });
 
+test('handle too-high heat', async () => {
+  expect(() => entangle(15, 2)).toThrow("You can\'t have that much heat! Raise your wanted level.");
+});
 
+test('handle too-high wanted', async () => {
+  expect(() => entangle(2, 15)).toThrow('Your wanted level is too high. Seek help.');
+});
+
+test('handle negatives', async () => {
+  expect(() => entangle(-2, 1)).toThrow('Heat and wanted level must be 0 or greater.');
+});

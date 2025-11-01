@@ -56,4 +56,4 @@ const combineDice = async (dicePics, saveLoc) => {
 	return attachment;
 }
 
-module.exports = { drawDice }
+module.exports = { drawDice, getPics }

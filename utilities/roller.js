@@ -84,7 +84,6 @@ const interpretResult = (rolls, result) => {
     }
 }
 
- //TODO entanglement roll 
 
 
 module.exports = { resistRoll, rollDice, interpretResult }
